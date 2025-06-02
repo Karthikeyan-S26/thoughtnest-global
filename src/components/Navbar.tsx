@@ -22,30 +22,41 @@ const Navbar = () => {
 
   const handleSearch = () => {
     console.log('Search clicked');
-    // In a real app, this would open a search modal or navigate to search page
-    alert('Search functionality would be implemented here');
+    // Open search functionality
+    const searchTerm = prompt('Enter search term:');
+    if (searchTerm) {
+      console.log(`Searching for: ${searchTerm}`);
+    }
   };
 
   const handleLogin = () => {
     console.log('Login clicked');
-    // In a real app, this would open login modal or navigate to login page
-    alert('Login modal would open here');
+    // Navigate to login page
+    window.location.href = '/login';
   };
 
   const handleRegister = () => {
     console.log('Register clicked');
-    // In a real app, this would open register modal or navigate to register page
-    alert('Register modal would open here');
+    // Navigate to register page
+    window.location.href = '/register';
   };
 
   const handleNavClick = (href: string) => {
+    console.log(`Navigating to: ${href}`);
     if (href.startsWith('#')) {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      window.location.href = href;
     }
     setIsMenuOpen(false);
+  };
+
+  const handleLanguageChange = (langCode: string) => {
+    console.log(`Language changed to: ${langCode}`);
+    setCurrentLanguage(langCode);
   };
 
   return (
@@ -54,7 +65,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent cursor-pointer">
               ThoughtNest
             </h1>
           </div>
@@ -66,7 +77,7 @@ const Navbar = () => {
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+                  className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group cursor-pointer"
                 >
                   {item.name}
                   <span className="absolute inset-x-0 bottom-0 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></span>
@@ -79,7 +90,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             {/* Language Selector */}
             <div className="relative group">
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors duration-200">
+              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors duration-200 cursor-pointer">
                 <Globe size={18} />
                 <span className="text-sm font-medium">{currentLanguage}</span>
               </button>
@@ -87,8 +98,8 @@ const Navbar = () => {
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
-                    onClick={() => setCurrentLanguage(lang.code)}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                    onClick={() => handleLanguageChange(lang.code)}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
                   >
                     {lang.name}
                   </button>
@@ -99,7 +110,7 @@ const Navbar = () => {
             {/* Search */}
             <button 
               onClick={handleSearch}
-              className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
+              className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200 cursor-pointer"
             >
               <Search size={18} />
             </button>
@@ -107,7 +118,7 @@ const Navbar = () => {
             {/* Auth Buttons */}
             <button 
               onClick={handleLogin}
-              className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors duration-200"
+              className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
             >
               <User size={18} />
               <span className="text-sm font-medium">Login</span>
@@ -115,7 +126,7 @@ const Navbar = () => {
             
             <button 
               onClick={handleRegister}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-md"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-md cursor-pointer"
             >
               Register
             </button>
@@ -125,7 +136,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-gray-700 hover:text-blue-600 transition-colors duration-200"
+              className="p-2 text-gray-700 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -140,7 +151,7 @@ const Navbar = () => {
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium transition-colors duration-200 w-full text-left"
+                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium transition-colors duration-200 w-full text-left cursor-pointer"
                 >
                   {item.name}
                 </button>
@@ -148,13 +159,13 @@ const Navbar = () => {
               <div className="pt-4 space-y-2">
                 <button 
                   onClick={handleLogin}
-                  className="w-full text-left text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-medium transition-colors duration-200"
+                  className="w-full text-left text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-medium transition-colors duration-200 cursor-pointer"
                 >
                   Login
                 </button>
                 <button 
                   onClick={handleRegister}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2 rounded-md text-base font-medium"
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2 rounded-md text-base font-medium cursor-pointer"
                 >
                   Register
                 </button>

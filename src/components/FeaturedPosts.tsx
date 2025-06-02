@@ -57,8 +57,8 @@ const FeaturedPosts = () => {
 
   const handleReadMore = (postId: number) => {
     console.log(`Reading post ${postId}`);
-    // In a real app, this would navigate to the full post
-    alert(`Would navigate to post ${postId}`);
+    // Navigate to blog post page
+    window.location.href = `/blog/${postId}`;
   };
 
   return (
@@ -106,7 +106,7 @@ const FeaturedPosts = () => {
                         <div className="flex items-center justify-between">
                           <button 
                             onClick={() => handleReadMore(post.id)}
-                            className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-all duration-200 transform hover:scale-105"
+                            className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-all duration-200 transform hover:scale-105 cursor-pointer"
                           >
                             Read More
                           </button>
@@ -125,13 +125,13 @@ const FeaturedPosts = () => {
           {/* Navigation */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer"
           >
             ←
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer"
           >
             →
           </button>
@@ -142,7 +142,7 @@ const FeaturedPosts = () => {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                className={`w-3 h-3 rounded-full transition-all duration-200 cursor-pointer ${
                   index === currentSlide 
                     ? 'bg-blue-600 scale-125' 
                     : 'bg-gray-300 hover:bg-gray-400'
