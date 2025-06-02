@@ -15,11 +15,21 @@ const Index = () => {
       <Navbar />
       <Hero />
       <FeaturedPosts />
-      <Categories />
-      <RecentBlogs />
-      <AuthorSpotlight />
-      <Newsletter />
-      <Footer />
+      <div id="categories">
+        <Categories />
+      </div>
+      <div id="recent-blogs">
+        <RecentBlogs />
+      </div>
+      <div id="authors">
+        <AuthorSpotlight />
+      </div>
+      <div id="newsletter">
+        <Newsletter />
+      </div>
+      <div id="contact">
+        <Footer />
+      </div>
     </div>
   );
 };

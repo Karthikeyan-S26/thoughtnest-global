@@ -55,6 +55,12 @@ const FeaturedPosts = () => {
     setCurrentSlide((prev) => (prev - 1 + featuredPosts.length) % featuredPosts.length);
   };
 
+  const handleReadMore = (postId: number) => {
+    console.log(`Reading post ${postId}`);
+    // In a real app, this would navigate to the full post
+    alert(`Would navigate to post ${postId}`);
+  };
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,7 +104,10 @@ const FeaturedPosts = () => {
                           {post.excerpt}
                         </p>
                         <div className="flex items-center justify-between">
-                          <button className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-all duration-200 transform hover:scale-105">
+                          <button 
+                            onClick={() => handleReadMore(post.id)}
+                            className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-all duration-200 transform hover:scale-105"
+                          >
                             Read More
                           </button>
                           <span className="text-gray-300 text-sm">

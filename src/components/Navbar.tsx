@@ -20,6 +20,34 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact' }
   ];
 
+  const handleSearch = () => {
+    console.log('Search clicked');
+    // In a real app, this would open a search modal or navigate to search page
+    alert('Search functionality would be implemented here');
+  };
+
+  const handleLogin = () => {
+    console.log('Login clicked');
+    // In a real app, this would open login modal or navigate to login page
+    alert('Login modal would open here');
+  };
+
+  const handleRegister = () => {
+    console.log('Register clicked');
+    // In a real app, this would open register modal or navigate to register page
+    alert('Register modal would open here');
+  };
+
+  const handleNavClick = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/20 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,14 +63,14 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
+                  onClick={() => handleNavClick(item.href)}
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 >
                   {item.name}
                   <span className="absolute inset-x-0 bottom-0 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></span>
-                </a>
+                </button>
               ))}
             </div>
           </div>
@@ -69,17 +97,26 @@ const Navbar = () => {
             </div>
 
             {/* Search */}
-            <button className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200">
+            <button 
+              onClick={handleSearch}
+              className="p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
+            >
               <Search size={18} />
             </button>
 
             {/* Auth Buttons */}
-            <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors duration-200">
+            <button 
+              onClick={handleLogin}
+              className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors duration-200"
+            >
               <User size={18} />
               <span className="text-sm font-medium">Login</span>
             </button>
             
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-md">
+            <button 
+              onClick={handleRegister}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-md"
+            >
               Register
             </button>
           </div>
@@ -100,19 +137,25 @@ const Navbar = () => {
           <div className="md:hidden border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-sm">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
+                  onClick={() => handleNavClick(item.href)}
+                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium transition-colors duration-200 w-full text-left"
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
               <div className="pt-4 space-y-2">
-                <button className="w-full text-left text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-medium transition-colors duration-200">
+                <button 
+                  onClick={handleLogin}
+                  className="w-full text-left text-gray-700 hover:text-blue-600 px-3 py-2 text-base font-medium transition-colors duration-200"
+                >
                   Login
                 </button>
-                <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2 rounded-md text-base font-medium">
+                <button 
+                  onClick={handleRegister}
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2 rounded-md text-base font-medium"
+                >
                   Register
                 </button>
               </div>
